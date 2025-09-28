@@ -1,0 +1,197 @@
+================================================================================
+                    🚀 GUIDE COMPLET DES COMMANDES TWAP
+================================================================================
+
+📋 SCRIPT POWERSHELL - GESTION DES ORDRES TWAP
+================================================================================
+
+1. 📊 LISTER LES ORDRES TWAP
+   Commande: .\list-twap.ps1
+   Description: Affiche tous vos ordres TWAP actifs avec détails complets
+   Usage: Vérifier l'état de vos ordres, progression, montants restants
+
+2. ➕ CRÉER UN ORDRE TWAP
+   Commande: .\create-twap-simple.ps1 [MONTANT] [NOMBRE_ORDRES] [INTERVALLE_SECONDES]
+   Description: Crée un nouvel ordre TWAP avec paramètres personnalisés
+   Exemples:
+   - .\create-twap-simple.ps1 2.0 10 120    (2 SUI, 10 swaps, 2 minutes)
+   - .\create-twap-simple.ps1 1.5 5 60      (1.5 SUI, 5 swaps, 1 minute)
+   - .\create-twap-simple.ps1 0.5 3 30      (0.5 SUI, 3 swaps, 30 secondes)
+
+3. ❌ ANNULER UN ORDRE SPÉCIFIQUE
+   Commande: .\cancel-twap-fixed.ps1 [ORDER_ID]
+   Description: Annule un ordre TWAP spécifique par son ID
+   Usage: Annuler un ordre particulier sans affecter les autres
+
+4. 🗑️ ANNULER TOUS LES ORDRES (avec confirmation)
+   Commande: .\cancel-all-twap.ps1
+   Description: Annule TOUS vos ordres TWAP avec confirmation détaillée
+   Usage: Nettoyer complètement tous vos ordres TWAP
+
+5. ⚡ ANNULER TOUS LES ORDRES (rapide)
+   Commande: .\cancel-all-twap-quick.ps1
+   Description: Annule automatiquement tous les ordres TWAP sans confirmation
+   Usage: Annulation rapide pour scripts automatisés
+
+6. 👁️ SURVEILLER LES ORDRES
+   Commande: .\monitor-twap.ps1
+   Description: Surveillance continue des ordres TWAP en temps réel
+   Usage: Suivre l'exécution des swaps automatiquement
+
+7. 🔧 EXÉCUTER MANUELLEMENT
+   Commande: .\execute-twap.ps1 [ORDER_ID]
+   Description: Force l'exécution d'un swap TWAP avant l'intervalle prévu
+   Usage: Exécution manuelle d'un swap en attente
+
+8. 🎭 DÉMONSTRATION COMPLÈTE
+   Commande: .\demo-twap.ps1
+   Description: Démonstration complète du système TWAP
+   Usage: Test du système avec création et annulation automatique
+
+================================================================================
+📋 COMMANDES DIRECTES SUI - CRÉATION D'ORDRES
+================================================================================
+
+9. 🏗️ CRÉER UN ORDRE TWAP (commande directe)
+   Commande: sui client call --package 0x320f72b44af6155c55d921dfd10d4447649b2a9463f95b535caa39cf7582e3dc --module cetus_position --function create_twap_order --args [SUI_COIN_ID] [USDC_COIN_EMPTY] [NOMBRE_ORDRES] [INTERVALLE_MS] 0x6 --type-args 0x2::sui::SUI 0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC --gas-budget 10000000
+   Description: Création directe d'ordre TWAP via Sui CLI
+   Paramètres:
+   - [SUI_COIN_ID]: ID du coin SUI à échanger
+   - [USDC_COIN_EMPTY]: ID du coin USDC vide pour initialisation
+   - [NOMBRE_ORDRES]: Nombre total de swaps à exécuter
+   - [INTERVALLE_MS]: Intervalle entre swaps en millisecondes
+
+================================================================================
+📋 COMMANDES DIRECTES SUI - ANNULATION D'ORDRES
+================================================================================
+
+10. 🗑️ ANNULER UN ORDRE TWAP (commande directe)
+    Commande: sui client call --package 0x320f72b44af6155c55d921dfd10d4447649b2a9463f95b535caa39cf7582e3dc --module cetus_position --function cancel_twap_order --args [ORDER_ID] --type-args 0x2::sui::SUI 0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC --gas-budget 5000000
+    Description: Annulation directe d'un ordre TWAP via Sui CLI
+    Paramètres:
+    - [ORDER_ID]: ID de l'ordre TWAP à annuler
+
+================================================================================
+📋 COMMANDES UTILITAIRES SUI
+================================================================================
+
+11. 💰 VÉRIFIER LE SOLDE
+    Commande: sui client balance
+    Description: Affiche votre solde SUI et USDC
+    Usage: Vérifier les fonds disponibles avant/après les ordres
+
+12. 📦 LISTER LES OBJETS
+    Commande: sui client objects
+    Description: Affiche tous vos objets Sui (coins, ordres, etc.)
+    Usage: Trouver les IDs des coins SUI et USDC
+
+13. 🔍 INSPECTER UN OBJET
+    Commande: sui client object [OBJECT_ID]
+    Description: Affiche les détails d'un objet spécifique
+    Usage: Vérifier les détails d'un ordre TWAP ou d'un coin
+
+14. 🪙 CRÉER UN COIN USDC VIDE
+    Commande: sui client split-coin --coin-id [USDC_COIN_ID] --amounts 0 --gas-budget 3000000
+    Description: Crée un coin USDC vide pour l'initialisation des ordres TWAP
+    Usage: Nécessaire avant de créer un nouvel ordre TWAP
+
+================================================================================
+📋 STRATÉGIES TWAP RECOMMANDÉES
+================================================================================
+
+15. 🚀 STRATÉGIE AGRESSIVE
+    Configuration: 20-50 swaps, 30-60 secondes d'intervalle
+    Usage: Marchés très volatils, scalping
+    Exemple: .\create-twap-simple.ps1 2.0 30 45
+
+16. ⚖️ STRATÉGIE MODÉRÉE
+    Configuration: 10-20 swaps, 2-5 minutes d'intervalle
+    Usage: Marchés normaux, trading régulier
+    Exemple: .\create-twap-simple.ps1 3.0 15 180
+
+17. 🐌 STRATÉGIE CONSERVATRICE
+    Configuration: 5-15 swaps, 10-30 minutes d'intervalle
+    Usage: Marchés stables, DCA long terme
+    Exemple: .\create-twap-simple.ps1 5.0 10 1800
+
+================================================================================
+📋 WORKFLOW RECOMMANDÉ
+================================================================================
+
+ÉTAPE 1: VÉRIFICATION
+- sui client balance (vérifier les fonds)
+- .\list-twap.ps1 (vérifier les ordres existants)
+
+ÉTAPE 2: PRÉPARATION
+- sui client objects (trouver les coins)
+- sui client split-coin --coin-id [USDC_ID] --amounts 0 --gas-budget 3000000
+
+ÉTAPE 3: CRÉATION
+- .\create-twap-simple.ps1 [MONTANT] [ORDRES] [INTERVALLE]
+
+ÉTAPE 4: SURVEILLANCE
+- .\monitor-twap.ps1 (surveillance continue)
+- .\list-twap.ps1 (vérification périodique)
+
+ÉTAPE 5: GESTION
+- .\execute-twap.ps1 [ORDER_ID] (exécution manuelle si besoin)
+- .\cancel-all-twap.ps1 (annulation si nécessaire)
+
+================================================================================
+📋 EXEMPLES PRATIQUES
+================================================================================
+
+EXEMPLE 1: TWAP DE TEST
+.\create-twap-simple.ps1 0.1 3 30
+# 0.1 SUI, 3 swaps, 30 secondes (test rapide)
+
+EXEMPLE 2: TWAP SCALPING
+.\create-twap-simple.ps1 1.0 20 30
+# 1 SUI, 20 swaps, 30 secondes (scalping agressif)
+
+EXEMPLE 3: TWAP DCA
+.\create-twap-simple.ps1 5.0 10 1800
+# 5 SUI, 10 swaps, 30 minutes (DCA conservateur)
+
+EXEMPLE 4: ANNULATION D'URGENCE
+.\cancel-all-twap-quick.ps1
+# Annule tous les ordres immédiatement
+
+================================================================================
+📋 CONSEILS IMPORTANTS
+================================================================================
+
+⚠️ FRAIS DE GAS
+- Chaque swap coûte des frais de gas
+- Plus d'ordres = plus de frais
+- Gardez toujours 0.5+ SUI pour les frais
+
+⚠️ COINS USDC
+- Créez des coins USDC vides avant chaque ordre
+- Un coin USDC ne peut être utilisé qu'une fois
+- Utilisez: sui client split-coin --coin-id [USDC_ID] --amounts 0
+
+⚠️ SURVEILLANCE
+- Utilisez .\list-twap.ps1 pour vérifier l'état
+- Les ordres s'exécutent automatiquement
+- Annulez si le marché devient défavorable
+
+⚠️ SÉCURITÉ
+- Testez toujours avec de petits montants
+- Gardez des fonds de réserve
+- Surveillez régulièrement vos ordres
+
+================================================================================
+🎯 RÉSUMÉ DES COMMANDES ESSENTIELLES
+================================================================================
+
+CRÉATION:     .\create-twap-simple.ps1 [MONTANT] [ORDRES] [INTERVALLE]
+LISTE:         .\list-twap.ps1
+ANNULATION:    .\cancel-all-twap.ps1
+SURVEILLANCE:  .\monitor-twap.ps1
+SOLDE:         sui client balance
+USDC VIDE:     sui client split-coin --coin-id [ID] --amounts 0 --gas-budget 3000000
+
+================================================================================
+🚀 VOUS MAÎTRISEZ MAINTENANT LE SYSTÈME TWAP COMPLET !
+================================================================================

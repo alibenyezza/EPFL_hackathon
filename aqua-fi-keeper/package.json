@@ -1,0 +1,41 @@
+{
+  "name": "aqua-fi-keeper",
+  "version": "1.0.0",
+  "description": "Automated liquidity management for Cetus on Sui Mainnet",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "create-position": "ts-node src/index.ts create-position",
+    "start-keeper": "ts-node src/index.ts start-keeper",
+    "start-buy-the-dip": "ts-node src/index.ts start-buy-the-dip",
+    "test-buy-the-dip": "ts-node src/index.ts test-buy-the-dip",
+    "create-multi-range": "ts-node src/index.ts create-multi-range",
+    "close-all-positions": "ts-node src/index.ts close-all-positions",
+    "monitor": "ts-node src/index.ts monitor",
+    "create-gas-vault": "ts-node src/index.ts create-gas-vault",
+    "deposit-gas": "ts-node src/index.ts deposit-gas",
+    "withdraw-gas": "ts-node src/index.ts withdraw-gas",
+    "gas-status": "ts-node src/index.ts gas-status",
+    "list-gas": "ts-node src/index.ts list-gas",
+    "analyze-gas": "ts-node src/index.ts analyze-gas",
+    "split-sui": "ts-node src/index.ts split-sui",
+    "create-twap-order": "ts-node src/index.ts create-twap-order",
+    "start-twap": "ts-node src/index.ts start-twap",
+    "cancel-twap": "ts-node src/index.ts cancel-twap",
+    "test-twap": "ts-node src/index.ts test-twap",
+    "monitor-twap": "ts-node src/index.ts monitor-twap"
+  },
+  "dependencies": {
+    "@cetusprotocol/cetus-sui-clmm-sdk": "^5.4.0",
+    "@mysten/sui": "^1.0.3",
+    "bn.js": "^5.2.1",
+    "dotenv": "^16.4.5",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.5",
+    "@types/node": "^20.12.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
